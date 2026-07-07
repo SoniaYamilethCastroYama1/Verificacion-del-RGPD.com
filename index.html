@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expediente de Cumplimiento · RGPD y LOPDGDD para empresas y autónomos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --papel:#F5F6F3;
+  --papel-carta:#FFFFFF;
+  --tinta:#0E2A47;
+  --tinta-suave:#3D5470;
+  --sello:#A31621;
+  --cumple:#1E7D5A;
+  --alerta:#B7791F;
+  --linea:#D8DCD4;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --display:'Fraunces', Georgia, serif;
+  --body:'Public Sans', -apple-system, system-ui, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--papel);color:var(--tinta);line-height:1.6;font-size:16px}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+.ref{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;background:var(--tinta);color:var(--papel);padding:.15rem .5rem;border-radius:2px;white-space:nowrap;display:inline-block}
+.ref.rojo{background:var(--sello)}
+.ref.verde{background:var(--cumple)}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--papel-carta);border-bottom:2px solid var(--tinta);display:flex;align-items:center;gap:1.2rem;padding:.7rem 1.2rem;flex-wrap:wrap}
+nav .marca{font-family:var(--display);font-weight:900;font-size:1.05rem;letter-spacing:-.01em}
+nav .marca span{color:var(--sello)}
+nav a{color:var(--tinta-suave);text-decoration:none;font-size:.85rem;font-weight:600;padding:.25rem 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:var(--tinta);border-bottom-color:var(--sello);outline:none}
+
+/* ---------- HERO ---------- */
+header{background:var(--tinta);color:var(--papel);padding:4.5rem 1.5rem 4rem;position:relative;overflow:hidden}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative}
+.hero-exp{font-family:var(--mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:#8FA3BC;margin-bottom:1.2rem}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(2.2rem,5.5vw,4rem);line-height:1.05;letter-spacing:-.02em;max-width:16ch}
+h1 em{font-style:italic;color:#F0C987}
+.hero-sub{margin-top:1.4rem;max-width:56ch;color:#C7D2DF;font-size:1.05rem}
+.hero-datos{display:flex;gap:2.5rem;margin-top:2.4rem;flex-wrap:wrap}
+.hero-datos div{border-left:3px solid var(--sello);padding-left:.9rem}
+.hero-datos strong{font-family:var(--display);font-size:1.5rem;display:block;font-weight:700}
+.hero-datos small{color:#8FA3BC;font-size:.78rem}
+.hero-cta{margin-top:2.6rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{font-family:var(--body);font-weight:700;font-size:.92rem;padding:.85rem 1.6rem;border-radius:3px;border:2px solid transparent;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .12s ease, background .12s ease}
+.btn:active{transform:translateY(1px)}
+.btn-sello{background:var(--sello);color:#fff}
+.btn-sello:hover{background:#8A1220}
+.btn-linea{background:transparent;color:var(--papel);border-color:#4C6382}
+.btn-linea:hover{border-color:var(--papel)}
+.hero-marca-agua{position:absolute;right:-3rem;top:50%;transform:translateY(-50%) rotate(-12deg);border:5px double #2C4560;opacity:.14;pointer-events:none}
+
+/* ---------- SECCIONES ---------- */
+section{padding:4rem 1.5rem;max-width:1060px;margin:0 auto}
+.sec-cab{margin-bottom:2.4rem}
+.sec-num{font-family:var(--mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sello);font-weight:500}
+h2{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,3.5vw,2.5rem);letter-spacing:-.015em;margin-top:.4rem;line-height:1.1}
+.sec-cab p{margin-top:.8rem;max-width:62ch;color:var(--tinta-suave)}
+
+/* Quién está obligado */
+.quien{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea)}
+.quien div{background:var(--papel-carta);padding:1.4rem}
+.quien h3{font-family:var(--display);font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+.quien p{font-size:.88rem;color:var(--tinta-suave)}
+.veredicto{margin-top:1.2rem;background:var(--tinta);color:var(--papel);padding:1.2rem 1.5rem;font-size:.95rem;border-left:6px solid var(--sello)}
+
+/* Obligaciones */
+.oblig{display:flex;flex-direction:column;gap:0;border-top:2px solid var(--tinta)}
+.ob{background:var(--papel-carta);border-bottom:1px solid var(--linea);padding:1.5rem;display:grid;grid-template-columns:110px 1fr;gap:1.4rem;align-items:start}
+.ob:hover{background:#FDFDFB}
+.ob-num{font-family:var(--mono);font-size:.72rem;color:var(--tinta-suave);line-height:1.9}
+.ob-num b{font-family:var(--display);font-size:1.6rem;font-weight:900;color:var(--tinta);display:block;line-height:1}
+.ob h3{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:.35rem}
+.ob p{font-size:.92rem;color:var(--tinta-suave);max-width:70ch}
+.ob .detalle{margin-top:.6rem;font-size:.85rem;background:var(--papel);border-left:3px solid var(--cumple);padding:.6rem .9rem;max-width:70ch}
+@media(max-width:640px){.ob{grid-template-columns:1fr;gap:.5rem}}
+
+/* Sanciones */
+.sanciones{background:#FBF4F4;border:1px solid #E4C7C9;padding:1.6rem;margin-top:2rem}
+.sanciones h3{font-family:var(--display);font-weight:700;color:var(--sello);margin-bottom:.6rem}
+.sanciones ul{list-style:none}
+.sanciones li{padding:.35rem 0;font-size:.92rem;border-bottom:1px dashed #E4C7C9}
+.sanciones li:last-child{border:none}
+.sanciones b{font-family:var(--mono);font-size:.85rem}
+</style>
+</head>
+<body>
+
+<nav aria-label="Navegación principal">
+  <div class="marca">EXPEDIENTE<span>·</span>DATOS</div>
+  <a href="#quien">Quién está obligado</a>
+  <a href="#obligaciones">Obligaciones</a>
+  <a href="#checklists">Checklists</a>
+  <a href="#formatos">Formatos</a>
+  <a href="#procesos">Procesos</a>
+  <a href="#diagnostico">Diagnóstico</a>
+  <a href="#matriz">Matriz de riesgos</a>
+</nav>
+
+<header>
+  <div class="hero-inner">
+    <div class="hero-exp">Expediente de cumplimiento · RGPD (UE) 2016/679 + LO 3/2018 LOPDGDD · España</div>
+    <h1>Ponga su negocio <em>en regla</em> con la protección de datos.</h1>
+    <p class="hero-sub">Guía operativa para empresas y autónomos: qué exige la ley, checklists por perfil, modelos de documentos listos para adaptar, procesos paso a paso y un diagnóstico que genera su informe de situación.</p>
+    <div class="hero-datos">
+      <div><strong>20 M€ / 4%</strong><small>multa máxima (Art. 83.5 RGPD)</small></div>
+      <div><strong>72 horas</strong><small>plazo para notificar brechas a la AEPD</small></div>
+      <div><strong>1 mes</strong><small>plazo para responder derechos</small></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#diagnostico" class="btn btn-sello">Hacer mi diagnóstico</a>
+      <a href="#obligaciones" class="btn btn-linea">Ver las obligaciones</a>
+    </div>
+  </div>
+</header>
+
+<section id="quien">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 01 · Ámbito de aplicación</div>
+    <h2>¿Quién está obligado?</h2>
+    <p>La normativa no distingue por tamaño ni facturación: se aplica a cualquier tratamiento de datos personales (nombre, teléfono, email, imagen, IP…) realizado en el marco de una actividad profesional.</p>
+  </div>
+  <div class="quien">
+    <div><h3>Autónomos</h3><p>Aunque actúe a título individual, si gestiona datos de clientes, proveedores o pacientes, la ley le aplica íntegramente.</p></div>
+    <div><h3>Pymes y micropymes</h3><p>Tratan datos de empleados, clientes y proveedores. Obligadas siempre; el tamaño solo modula algunas obligaciones (DPO, RAT).</p></div>
+    <div><h3>Comercios y web</h3><p>Formularios, newsletters, cookies, tienda online o videovigilancia son tratamientos: exigen textos legales y consentimiento válido.</p></div>
+    <div><h3>Profesionales sanitarios, legales…</h3><p>Tratan categorías especiales de datos (salud, etc.): obligaciones reforzadas y, en muchos casos, DPO obligatorio.</p></div>
+  </div>
+  <div class="veredicto"><strong>Regla práctica:</strong> si guarda aunque sea una agenda de clientes o tiene un solo empleado, ya es «responsable del tratamiento» y este expediente le aplica.</div>
+</section>
+
+<section id="obligaciones">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 02 · Requisitos legales</div>
+    <h2>Las 10 obligaciones del responsable</h2>
+    <p>Estas son las exigencias del RGPD y la LOPDGDD que la AEPD verifica en una inspección. Cada una tiene su formato modelo en el Apartado 04.</p>
+  </div>
+  <div class="oblig">
+
+    <div class="ob"><div class="ob-num"><b>01</b><span class="ref">Art. 6 RGPD</span></div>
+      <div><h3>Base jurídica para cada tratamiento</h3>
+      <p>Todo uso de datos necesita una legitimación: ejecución de contrato, obligación legal, consentimiento, interés legítimo, interés vital o misión pública. Sin base jurídica, el tratamiento es ilícito.</p>
+      <div class="detalle">Acción: identifique cada tratamiento (clientes, nóminas, marketing…) y anote su base legal en el RAT.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>02</b><span class="ref">Arts. 13–14 RGPD</span></div>
+      <div><h3>Deber de información (transparencia)</h3>
+      <p>Debe informar a las personas de quién es el responsable, para qué usa sus datos, con qué base legal, a quién los cede, cuánto tiempo los conserva y cómo ejercer sus derechos. En formularios, contratos, web y carteles.</p>
+      <div class="detalle">Acción: use la cláusula informativa por capas (Formato F1) en todos los puntos de recogida.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>03</b><span class="ref">Arts. 4.11 y 7 RGPD</span></div>
+      <div><h3>Consentimiento válido cuando proceda</h3>
+      <p>Debe ser libre, específico, informado e inequívoco: casillas sin premarcar, una casilla por finalidad, y tan fácil de retirar como de dar. Las cookies no esenciales exigen consentimiento granular (rechazar tan fácil como aceptar).</p>
+      <div class="detalle">Acción: revise formularios y banner de cookies. Guarde prueba del consentimiento (Formato F2).</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>04</b><span class="ref">Art. 30 RGPD</span></div>
+      <div><h3>Registro de Actividades de Tratamiento (RAT)</h3>
+      <p>Inventario documentado de qué datos trata, con qué fin, base legal, destinatarios, plazos y medidas de seguridad. La exención para menos de 250 empleados casi nunca aplica en la práctica (basta que el tratamiento no sea ocasional, como clientes o nóminas).</p>
+      <div class="detalle">Acción: complete la plantilla de RAT (Formato F3) y manténgala actualizada. Es el primer documento que pide la AEPD.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>05</b><span class="ref">Art. 32 RGPD</span></div>
+      <div><h3>Análisis de riesgos y medidas de seguridad</h3>
+      <p>Debe aplicar medidas técnicas y organizativas apropiadas al riesgo: contraseñas robustas, copias de seguridad, cifrado, control de accesos, armarios bajo llave, confidencialidad del personal.</p>
+      <div class="detalle">Acción: haga un análisis de riesgos básico y firme compromisos de confidencialidad con el personal (Formato F8).</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>06</b><span class="ref">Art. 28 RGPD</span></div>
+      <div><h3>Contratos con encargados del tratamiento</h3>
+      <p>Gestoría, programa de facturación, hosting, email marketing, nube, herramientas de IA… todo proveedor que accede a datos por su cuenta necesita un contrato de encargo con el contenido mínimo del art. 28.3.</p>
+      <div class="detalle">Acción: inventaríe proveedores y firme o localice el contrato/DPA de cada uno (Formato F4).</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>07</b><span class="ref">Arts. 15–22 RGPD</span></div>
+      <div><h3>Atender los derechos de las personas</h3>
+      <p>Acceso, rectificación, supresión, oposición, limitación, portabilidad y no ser objeto de decisiones automatizadas. Plazo: 1 mes (ampliable 2 más en casos complejos, avisando). Gratuito.</p>
+      <div class="detalle">Acción: defina un canal (email) y use el modelo de respuesta (Formato F6). Documente cada solicitud.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>08</b><span class="ref">Arts. 33–34 RGPD</span></div>
+      <div><h3>Gestión y notificación de brechas</h3>
+      <p>Ante una violación de seguridad (robo de portátil, ransomware, email masivo con CCO expuesto…), debe evaluarla, registrarla y, si hay riesgo para las personas, notificar a la AEPD en 72 horas y comunicar a los afectados si el riesgo es alto.</p>
+      <div class="detalle">Acción: tenga el registro interno de brechas preparado antes del incidente (Formato F5) y siga el Proceso P2.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>09</b><span class="ref">Art. 37 RGPD · Art. 34 LOPDGDD</span></div>
+      <div><h3>Delegado de Protección de Datos (DPO) si es obligatorio</h3>
+      <p>Obligatorio para tratamientos a gran escala, categorías especiales de forma sistemática o actividades del art. 34 LOPDGDD (centros sanitarios, colegios, aseguradoras, publicidad con perfilados…). La designación se comunica a la AEPD en 10 días. No designarlo cuando es obligatorio es infracción grave.</p>
+      <div class="detalle">Acción: verifique si su actividad está en el art. 34 LOPDGDD. Puede ser interno o externo.</div></div></div>
+
+    <div class="ob"><div class="ob-num"><b>10</b><span class="ref">Art. 35 RGPD · Art. 22 LOPDGDD</span></div>
+      <div><h3>EIPD, videovigilancia y web</h3>
+      <p>Los tratamientos de alto riesgo exigen Evaluación de Impacto previa. La videovigilancia requiere cartel informativo y conservación máxima de 1 mes como regla general. La web necesita aviso legal (LSSI), política de privacidad y política de cookies.</p>
+      <div class="detalle">Acción: cartel de videovigilancia (Formato F7) y textos legales web (Formato F10).</div></div></div>
+
+  </div>
+
+  <div class="sanciones">
+    <h3>Régimen sancionador — lo que se juega</h3>
+    <ul>
+      <li><b>Hasta 20 M€ o 4%</b> del volumen de negocio mundial: infracciones muy graves (base jurídica, derechos, transferencias). — <span class="ref rojo">Art. 83.5 RGPD</span></li>
+      <li><b>Hasta 10 M€ o 2%</b>: infracciones graves (RAT, brechas, encargados, DPO). — <span class="ref rojo">Art. 83.4 RGPD</span></li>
+      <li><b>5.000 € – 100.000 €</b>: rango práctico habitual de las sanciones a pymes españolas, según criterios de graduación (Art. 83.2 RGPD y Art. 76 LOPDGDD).</li>
+      <li><b>Apercibimiento:</b> para microempresas y autónomos con atenuantes, la AEPD puede sustituir la multa por un requerimiento de adaptación. Cooperar siempre suma.</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+/* ---------- CHECKLISTS ---------- */
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.tab{font-family:var(--body);font-weight:700;font-size:.88rem;padding:.6rem 1.2rem;background:var(--papel-carta);border:1.5px solid var(--linea);border-radius:3px;cursor:pointer;color:var(--tinta-suave)}
+.tab[aria-selected="true"]{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.tab:focus-visible{outline:2px solid var(--sello);outline-offset:2px}
+.panel{display:none;background:var(--papel-carta);border:1px solid var(--linea);padding:1.6rem}
+.panel.activo{display:block}
+.progreso{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.barra{flex:1;height:10px;background:var(--papel);border:1px solid var(--linea);border-radius:99px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--cumple);transition:width .3s ease}
+.pct{font-family:var(--mono);font-size:.85rem;min-width:9ch;text-align:right}
+.check-item{display:flex;gap:.8rem;align-items:flex-start;padding:.7rem 0;border-bottom:1px dashed var(--linea);cursor:pointer}
+.check-item:last-child{border:none}
+.check-item input{margin-top:.3rem;width:17px;height:17px;accent-color:var(--cumple);flex-shrink:0;cursor:pointer}
+.check-item span{font-size:.92rem}
+.check-item .ref{margin-left:.5rem}
+.check-item input:checked ~ span{color:var(--tinta-suave);text-decoration:line-through;text-decoration-color:#B9C4B9}
+
+/* ---------- FORMATOS ---------- */
+.formatos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
+.formato{background:var(--papel-carta);border:1px solid var(--linea);border-top:4px solid var(--tinta);padding:1.3rem;display:flex;flex-direction:column;gap:.6rem}
+.formato .fnum{font-family:var(--mono);font-size:.72rem;color:var(--sello);letter-spacing:.1em}
+.formato h3{font-family:var(--display);font-size:1.05rem;font-weight:700;line-height:1.25}
+.formato p{font-size:.85rem;color:var(--tinta-suave);flex:1}
+.formato .acciones{display:flex;gap:.6rem;margin-top:.4rem}
+.btn-mini{font-size:.8rem;font-weight:700;padding:.5rem .9rem;border-radius:3px;border:1.5px solid var(--tinta);background:var(--tinta);color:#fff;cursor:pointer}
+.btn-mini:hover{background:#1A3B60}
+.btn-mini.gris{background:transparent;color:var(--tinta)}
+.btn-mini.gris:hover{background:var(--papel)}
+.btn-mini:focus-visible{outline:2px solid var(--sello);outline-offset:2px}
+.modal{position:fixed;inset:0;background:rgba(14,42,71,.55);display:none;align-items:center;justify-content:center;padding:1.5rem;z-index:100}
+.modal.abierto{display:flex}
+.modal-caja{background:var(--papel-carta);max-width:760px;width:100%;max-height:85vh;display:flex;flex-direction:column;border-top:6px solid var(--sello)}
+.modal-cab{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.4rem;border-bottom:1px solid var(--linea)}
+.modal-cab h3{font-family:var(--display);font-size:1.05rem}
+.modal-cerrar{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--tinta-suave);line-height:1}
+.modal pre{flex:1;overflow:auto;padding:1.4rem;font-family:var(--mono);font-size:.78rem;white-space:pre-wrap;background:#FBFBF9}
+
+/* ---------- PROCESOS ---------- */
+.proceso{background:var(--papel-carta);border:1px solid var(--linea);margin-bottom:1.4rem}
+.proceso-cab{width:100%;text-align:left;background:none;border:none;padding:1.2rem 1.4rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:1rem}
+.proceso-cab:focus-visible{outline:2px solid var(--sello);outline-offset:-2px}
+.proceso-cab h3{font-family:var(--display);font-size:1.1rem;font-weight:700}
+.proceso-cab .pref{font-family:var(--mono);font-size:.72rem;color:var(--sello);display:block;letter-spacing:.1em;margin-bottom:.2rem}
+.proceso-cab .flecha{font-size:1.2rem;transition:transform .2s}
+.proceso.abierto .flecha{transform:rotate(90deg)}
+.pasos{display:none;padding:0 1.4rem 1.4rem}
+.proceso.abierto .pasos{display:block}
+.paso{display:grid;grid-template-columns:44px 1fr;gap:1rem;padding:.9rem 0;border-top:1px dashed var(--linea)}
+.paso-n{font-family:var(--display);font-weight:900;font-size:1.2rem;color:var(--papel);background:var(--tinta);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.paso b{display:block;font-size:.95rem}
+.paso p{font-size:.87rem;color:var(--tinta-suave)}
+.paso .plazo{font-family:var(--mono);font-size:.72rem;color:var(--sello);font-weight:500}
+</style>
+
+<section id="checklists">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 03 · Autoverificación</div>
+    <h2>Checklists por perfil</h2>
+    <p>Marque lo que ya tiene implantado. La barra de progreso le indica cuánto le falta. (El progreso se mantiene mientras la página esté abierta.)</p>
+  </div>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-panel="cl-auto">Autónomo</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="cl-pyme">Pyme con empleados</button>
+    <button class="tab" role="tab" aria-selected="false" data-panel="cl-web">Web / eCommerce</button>
+  </div>
+
+  <div class="panel activo" id="cl-auto" role="tabpanel">
+    <div class="progreso"><div class="barra"><i></i></div><div class="pct">0 / 0</div></div>
+    <div class="lista"></div>
+  </div>
+  <div class="panel" id="cl-pyme" role="tabpanel">
+    <div class="progreso"><div class="barra"><i></i></div><div class="pct">0 / 0</div></div>
+    <div class="lista"></div>
+  </div>
+  <div class="panel" id="cl-web" role="tabpanel">
+    <div class="progreso"><div class="barra"><i></i></div><div class="pct">0 / 0</div></div>
+    <div class="lista"></div>
+  </div>
+</section>
+
+<section id="formatos">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 04 · Modelos de documentos</div>
+    <h2>Formatos listos para adaptar</h2>
+    <p>Diez modelos base con los contenidos mínimos legales. Sustituya los campos entre [CORCHETES] por sus datos. Puede verlos en pantalla o descargarlos como archivo de texto.</p>
+  </div>
+  <div class="formatos" id="grid-formatos"></div>
+</section>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div class="modal-caja">
+    <div class="modal-cab">
+      <h3 id="modal-titulo"></h3>
+      <button class="modal-cerrar" aria-label="Cerrar">×</button>
+    </div>
+    <pre id="modal-texto"></pre>
+  </div>
+</div>
+
+<section id="procesos">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 05 · Procedimientos operativos</div>
+    <h2>Procesos paso a paso</h2>
+    <p>Los cuatro flujos que debe tener por escrito. Despliegue cada uno para ver sus pasos y plazos.</p>
+  </div>
+  <div id="lista-procesos"></div>
+</section>
+
+<style>
+/* ---------- DIAGNÓSTICO ---------- */
+#diagnostico{padding-bottom:5rem}
+.diag-caja{background:var(--papel-carta);border:1px solid var(--linea);border-top:6px solid var(--sello);padding:2rem}
+.pregunta{padding:1.1rem 0;border-bottom:1px dashed var(--linea)}
+.pregunta legend, .pregunta .q{font-weight:600;font-size:.95rem;margin-bottom:.6rem}
+.pregunta .q .ref{margin-left:.5rem}
+.opciones{display:flex;gap:.6rem;flex-wrap:wrap}
+.opciones label{font-size:.85rem;font-weight:600;border:1.5px solid var(--linea);border-radius:99px;padding:.4rem 1rem;cursor:pointer;background:var(--papel)}
+.opciones input{position:absolute;opacity:0;pointer-events:none}
+.opciones label:has(input:checked){background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.opciones label:has(input:focus-visible){outline:2px solid var(--sello);outline-offset:2px}
+.diag-pie{margin-top:1.6rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-diag{background:var(--sello);color:#fff;border:none;font-weight:700;font-size:1rem;padding:.9rem 1.8rem;border-radius:3px;cursor:pointer}
+.btn-diag:hover{background:#8A1220}
+.btn-diag:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
+.aviso-faltan{color:var(--sello);font-size:.85rem;font-weight:600}
+
+/* Informe */
+#informe{display:none;margin-top:2.5rem;background:var(--papel-carta);border:1px solid var(--tinta);padding:2.5rem;position:relative}
+#informe.visible{display:block}
+.inf-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;border-bottom:2px solid var(--tinta);padding-bottom:1.2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.inf-cab h3{font-family:var(--display);font-weight:900;font-size:1.5rem}
+.inf-cab .meta{font-family:var(--mono);font-size:.75rem;color:var(--tinta-suave);line-height:1.8}
+.sello-caja{border:4px double;padding:.6rem 1.2rem;transform:rotate(-6deg);font-family:var(--display);font-weight:900;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;text-align:center;line-height:1.2}
+.sello-alto{color:var(--sello);border-color:var(--sello)}
+.sello-medio{color:var(--alerta);border-color:var(--alerta)}
+.sello-bajo{color:var(--cumple);border-color:var(--cumple)}
+.inf-resumen{display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.inf-resumen div{border-left:3px solid var(--tinta);padding-left:.8rem}
+.inf-resumen strong{font-family:var(--display);font-size:1.6rem;display:block}
+.inf-resumen small{font-size:.75rem;color:var(--tinta-suave)}
+.hallazgo{display:grid;grid-template-columns:26px 1fr;gap:.9rem;padding:.9rem 0;border-bottom:1px dashed var(--linea)}
+.hallazgo .icono{font-weight:900;font-family:var(--display);text-align:center}
+.h-mal .icono{color:var(--sello)}
+.h-parcial .icono{color:var(--alerta)}
+.h-bien .icono{color:var(--cumple)}
+.hallazgo b{font-size:.92rem;display:block}
+.hallazgo p{font-size:.85rem;color:var(--tinta-suave)}
+.inf-acciones{margin-top:1.5rem;background:var(--papel);border-left:4px solid var(--sello);padding:1.2rem 1.4rem}
+.inf-acciones h4{font-family:var(--display);margin-bottom:.6rem}
+.inf-acciones ol{padding-left:1.2rem}
+.inf-acciones li{font-size:.9rem;padding:.25rem 0}
+.inf-pie{margin-top:1.8rem;display:flex;gap:1rem;flex-wrap:wrap}
+.inf-nota{font-size:.75rem;color:var(--tinta-suave);margin-top:1.4rem;border-top:1px solid var(--linea);padding-top:.8rem}
+
+footer{background:var(--tinta);color:#8FA3BC;padding:2.5rem 1.5rem;font-size:.82rem}
+footer .f-inner{max-width:1060px;margin:0 auto}
+footer a{color:#C7D2DF}
+
+@media print{
+  nav,header,#quien,#obligaciones,#checklists,#formatos,#procesos,.diag-caja,footer{display:none!important}
+  body{background:#fff}
+  #informe{border:none;padding:0}
+  .inf-pie{display:none!important}
+}
+</style>
+
+<section id="diagnostico">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 06 · Diagnóstico de situación</div>
+    <h2>Informe de diagnóstico</h2>
+    <p>Responda a las 14 preguntas y genere su informe: nivel de riesgo, incumplimientos detectados con su artículo de referencia y plan de acción priorizado. Puede imprimirlo o guardarlo en PDF.</p>
+  </div>
+  <div class="diag-caja">
+    <div id="cuestionario"></div>
+    <div class="diag-pie">
+      <button class="btn-diag" id="btn-generar">Generar informe de diagnóstico</button>
+      <span class="aviso-faltan" id="aviso-faltan" hidden>Faltan preguntas por responder.</span>
+    </div>
+  </div>
+
+  <div id="informe" aria-live="polite">
+    <div class="inf-cab">
+      <div>
+        <h3>Informe de diagnóstico · Protección de datos</h3>
+        <div class="meta" id="inf-meta"></div>
+      </div>
+      <div class="sello-caja" id="inf-sello"></div>
+    </div>
+    <div class="inf-resumen">
+      <div><strong id="inf-nota-num">–</strong><small>índice de cumplimiento</small></div>
+      <div><strong id="inf-graves">–</strong><small>incumplimientos detectados</small></div>
+      <div><strong id="inf-parciales">–</strong><small>puntos a reforzar</small></div>
+    </div>
+    <div id="inf-hallazgos"></div>
+    <div class="inf-acciones">
+      <h4>Plan de acción priorizado</h4>
+      <ol id="inf-plan"></ol>
+    </div>
+    <div class="inf-pie">
+      <button class="btn-mini" onclick="window.print()">Imprimir / guardar en PDF</button>
+      <button class="btn-mini gris" id="btn-txt">Descargar informe (.txt)</button>
+    </div>
+    <p class="inf-nota">Este informe es una autoevaluación orientativa basada en el RGPD y la LOPDGDD. No constituye asesoramiento jurídico ni sustituye a una auditoría profesional. Herramientas oficiales gratuitas de la AEPD: Facilita RGPD, Gestiona EIPD y Evalúa-Riesgo (aepd.es).</p>
+  </div>
+</section>
+
+<style>
+/* ---------- MATRIZ DE RIESGOS ---------- */
+#matriz{padding-bottom:5rem}
+.mx-intro{background:var(--papel-carta);border:1px solid var(--linea);border-left:5px solid var(--tinta);padding:1.2rem 1.5rem;margin-bottom:2rem;font-size:.9rem;color:var(--tinta-suave)}
+.mx-intro b{color:var(--tinta)}
+.mx-tabla{width:100%;border-collapse:collapse;background:var(--papel-carta);border:1px solid var(--linea);font-size:.86rem;margin-bottom:2rem}
+.mx-tabla thead th{background:var(--tinta);color:var(--papel);font-weight:600;padding:.7rem .6rem;text-align:left;font-size:.78rem;position:sticky;top:0}
+.mx-tabla th.c{text-align:center;width:15%}
+.mx-tabla td{padding:.7rem .6rem;border-bottom:1px solid var(--linea);vertical-align:top}
+.mx-tabla tr:hover td{background:#FDFDFB}
+.mx-riesgo b{display:block;font-size:.9rem}
+.mx-riesgo .ref{margin-top:.3rem}
+.mx-sel{width:100%;font-family:var(--body);font-size:.82rem;padding:.4rem;border:1.5px solid var(--linea);border-radius:3px;background:var(--papel);cursor:pointer}
+.mx-sel:focus-visible{outline:2px solid var(--sello);outline-offset:1px}
+.mx-cumple-si{border-color:var(--cumple)}
+.mx-cumple-no{border-color:var(--sello);background:#FBF4F4}
+.mx-nivel{display:inline-block;min-width:2.2ch;text-align:center;font-family:var(--mono);font-weight:600;padding:.2rem .5rem;border-radius:3px;font-size:.8rem;color:#fff}
+.n1{background:#2E7D32}.n2{background:#7CB342}.n3{background:#F9A825;color:#3b2f00}.n4{background:#EF6C00}.n5{background:#C62828}
+.mx-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+@media(max-width:720px){.mx-tabla{display:block;overflow-x:auto;white-space:nowrap}}
+
+/* Mapa de calor */
+#mx-resultado{display:none}
+#mx-resultado.visible{display:block}
+.heat-wrap{display:grid;grid-template-columns:auto 1fr;gap:.6rem;margin:1.5rem 0 2rem}
+.heat-ejeY{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.heat-main{display:flex;flex-direction:column;gap:.4rem}
+.heat-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,minmax(64px,auto));gap:3px}
+.heat-cell{border-radius:3px;padding:.35rem;position:relative;display:flex;flex-wrap:wrap;gap:3px;align-content:flex-start;min-height:64px}
+.heat-cell .coord{position:absolute;top:2px;right:4px;font-family:var(--mono);font-size:.6rem;opacity:.45}
+.heat-verde{background:#DCE7DA}.heat-amarillo{background:#FBEFC7}.heat-naranja{background:#F7D9BC}.heat-rojo{background:#F1C7C7}
+.chip{width:24px;height:24px;border-radius:50%;color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:default;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.chip:hover{transform:scale(1.15)}
+.heat-ejeX{grid-column:2;text-align:center;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave);margin-top:.3rem}
+.heat-escala{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.78rem;margin-bottom:1.5rem}
+.heat-escala span{display:flex;align-items:center;gap:.4rem}
+.heat-escala i{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+.mx-resumen{display:flex;gap:2rem;flex-wrap:wrap;margin:1.5rem 0}
+.mx-resumen div{border-left:3px solid var(--tinta);padding-left:.8rem}
+.mx-resumen strong{font-family:var(--display);font-size:1.6rem;display:block}
+.mx-resumen small{font-size:.75rem;color:var(--tinta-suave)}
+.mx-lista-riesgo{border-top:2px solid var(--tinta)}
+.mx-fila{display:grid;grid-template-columns:34px 1fr auto;gap:.9rem;align-items:center;padding:.7rem 0;border-bottom:1px dashed var(--linea)}
+.mx-fila .idx{width:24px;height:24px;border-radius:50%;color:#fff;font-family:var(--mono);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center}
+.mx-fila b{font-size:.9rem;display:block}
+.mx-fila small{color:var(--tinta-suave);font-size:.8rem}
+.mx-fila .val{font-family:var(--mono);font-size:.8rem;text-align:right;white-space:nowrap}
+</style>
+
+<section id="matriz">
+  <div class="sec-cab">
+    <div class="sec-num">Apartado 07 · Mapa de exposición</div>
+    <h2>Matriz de riesgos</h2>
+    <p>Para cada obligación, indique si la cumple y estime dos cosas: la probabilidad de que se materialice el problema (una reclamación, una inspección, una brecha) y el impacto que tendría en su negocio. La herramienta sitúa cada riesgo en una matriz 5×5 y genera su mapa de calor.</p>
+  </div>
+
+  <div class="mx-intro">
+    <b>Cómo se calcula.</b> Riesgo = Probabilidad × Impacto, ambos en escala 1–5. La probabilidad la ajusta usted, pero parte de un valor sugerido: si <b>no cumple</b> una obligación, la probabilidad base es alta; si <b>cumple</b>, baja. El impacto lo estima usted según lo que ese fallo supondría para su actividad (sanción, pérdida de clientes, daño reputacional). Es una herramienta de priorización, no una medición legal exacta.
+  </div>
+
+  <table class="mx-tabla">
+    <thead><tr>
+      <th>Obligación / riesgo</th>
+      <th class="c">¿La cumple?</th>
+      <th class="c">Probabilidad (1–5)</th>
+      <th class="c">Impacto (1–5)</th>
+      <th class="c">Nivel</th>
+    </tr></thead>
+    <tbody id="mx-cuerpo"></tbody>
+  </table>
+
+  <div class="mx-btns">
+    <button class="btn-diag" id="mx-generar">Generar matriz de riesgos</button>
+    <button class="btn-mini gris" id="mx-reset">Reiniciar</button>
+  </div>
+
+  <div id="mx-resultado" aria-live="polite">
+    <div class="inf-cab">
+      <div>
+        <h3 style="font-family:var(--display);font-weight:900;font-size:1.4rem">Mapa de calor de exposición</h3>
+        <div class="meta" style="font-family:var(--mono);font-size:.75rem;color:var(--tinta-suave)" id="mx-fecha"></div>
+      </div>
+    </div>
+
+    <div class="mx-resumen">
+      <div><strong id="mx-criticos">–</strong><small>riesgos críticos (rojo)</small></div>
+      <div><strong id="mx-altos">–</strong><small>riesgos altos (naranja)</small></div>
+      <div><strong id="mx-medio">–</strong><small>índice medio de exposición</small></div>
+    </div>
+
+    <div class="heat-escala">
+      <span><i class="heat-verde"></i>Bajo (1–4)</span>
+      <span><i class="heat-amarillo"></i>Medio (5–9)</span>
+      <span><i class="heat-naranja"></i>Alto (10–14)</span>
+      <span><i class="heat-rojo"></i>Crítico (15–25)</span>
+    </div>
+
+    <div class="heat-wrap">
+      <div class="heat-ejeY">Impacto →</div>
+      <div class="heat-main">
+        <div class="heat-grid" id="mx-heat"></div>
+        <div class="heat-ejeX">Probabilidad →</div>
+      </div>
+    </div>
+
+    <div class="mx-lista-riesgo" id="mx-ranking"></div>
+
+    <div class="inf-pie" style="margin-top:1.6rem">
+      <button class="btn-mini" onclick="window.print()">Imprimir / guardar en PDF</button>
+      <button class="btn-mini gris" id="mx-txt">Descargar matriz (.txt)</button>
+    </div>
+    <p class="inf-nota" style="font-size:.75rem;color:var(--tinta-suave);margin-top:1.4rem;border-top:1px solid var(--linea);padding-top:.8rem">
+      Matriz orientativa de autoevaluación. La probabilidad e impacto son estimaciones del propio responsable; no constituyen una valoración jurídica del riesgo sancionador. Metodología: matriz de riesgos 5×5 (probabilidad × impacto).
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="f-inner">
+    <strong style="color:#F5F6F3;font-family:var(--display)">EXPEDIENTE·DATOS</strong> — Guía práctica de cumplimiento RGPD (Reglamento UE 2016/679) y LOPDGDD (LO 3/2018) para empresas y autónomos en España. Contenido informativo; para casos complejos, consulte con un profesional o con la <a href="https://www.aepd.es" target="_blank" rel="noopener">AEPD</a>.
+  </div>
+</footer>
+
+<script>
+/* ================= CHECKLISTS ================= */
+const CHECKLISTS = {
+ "cl-auto":[
+  ["Tengo identificados todos mis tratamientos (clientes, facturación, agenda…) y su base jurídica","Art. 6 RGPD"],
+  ["He elaborado mi Registro de Actividades de Tratamiento (RAT)","Art. 30 RGPD"],
+  ["Informo a mis clientes al recoger sus datos (cláusula en presupuestos, contratos y formularios)","Art. 13 RGPD"],
+  ["Tengo contrato de encargo firmado con mi gestoría","Art. 28 RGPD"],
+  ["Tengo contrato/DPA con mi software de facturación, nube y correo","Art. 28 RGPD"],
+  ["Uso contraseñas robustas y distintas por servicio, con doble factor donde es posible","Art. 32 RGPD"],
+  ["Hago copias de seguridad periódicas de los datos","Art. 32 RGPD"],
+  ["Tengo un canal definido para que los clientes ejerzan sus derechos","Arts. 15–22 RGPD"],
+  ["Sé qué hacer y a quién avisar si pierdo el portátil o sufro un ciberataque","Arts. 33–34 RGPD"],
+  ["Si envío emails comerciales, tengo consentimiento o relación previa y ofrezco baja fácil","LSSI Art. 21"]
+ ],
+ "cl-pyme":[
+  ["RAT completo y actualizado, incluyendo el tratamiento de personal y nóminas","Art. 30 RGPD"],
+  ["Cláusulas informativas en contratos laborales y de clientes","Art. 13 RGPD"],
+  ["Compromisos de confidencialidad firmados por toda la plantilla","Art. 32 RGPD"],
+  ["Contratos de encargo con gestoría, prevención de riesgos, mutua, hosting y demás proveedores","Art. 28 RGPD"],
+  ["Control de accesos: cada empleado accede solo a los datos que necesita","Art. 32 RGPD"],
+  ["He verificado si estoy obligado a designar DPO (art. 34 LOPDGDD) y, en su caso, lo he comunicado a la AEPD","Art. 37 RGPD"],
+  ["Si tengo canal de denuncias (obligatorio desde 50 empleados), cumple la Ley 2/2023 y tiene su tratamiento en el RAT","Ley 2/2023"],
+  ["Videovigilancia: cartel informativo, sin zonas de descanso, conservación máxima 1 mes","Art. 22 LOPDGDD"],
+  ["Si uso geolocalización o control digital de la jornada, he informado a los trabajadores y consultado a sus representantes","Arts. 89–90 LOPDGDD"],
+  ["Registro de brechas de seguridad preparado y procedimiento de 72 h conocido por el equipo","Arts. 33–34 RGPD"],
+  ["Política de desconexión digital documentada","Art. 88 LOPDGDD"],
+  ["Las decisiones que afectan a empleados basadas en algoritmos o IA tienen supervisión humana y explicación","Art. 22 RGPD"]
+ ],
+ "cl-web":[
+  ["Aviso legal con los datos identificativos del titular","Art. 10 LSSI"],
+  ["Política de privacidad completa y accesible desde todas las páginas","Arts. 13–14 RGPD"],
+  ["Banner de cookies con consentimiento granular: rechazar es tan fácil como aceptar","Guía cookies AEPD"],
+  ["Las cookies no esenciales NO se cargan antes de aceptar","Art. 22.2 LSSI"],
+  ["Formularios con casillas sin premarcar y una casilla por finalidad","Art. 7 RGPD"],
+  ["Guardo prueba del consentimiento (fecha, texto aceptado, origen)","Art. 7.1 RGPD"],
+  ["Newsletter con doble opt-in o registro verificable y enlace de baja en cada envío","Art. 21 LSSI"],
+  ["Contrato/DPA con hosting, plataforma eCommerce, pasarela de pago y herramienta de emailing","Art. 28 RGPD"],
+  ["Si uso herramientas fuera de la UE, he verificado las transferencias internacionales (cláusulas tipo o adecuación)","Cap. V RGPD"],
+  ["La tienda solo pide los datos necesarios para el pedido (minimización)","Art. 5.1.c RGPD"],
+  ["Web servida por HTTPS y pasarela de pago segura","Art. 32 RGPD"]
+ ]
+};
+
+function pintarChecklists(){
+ Object.entries(CHECKLISTS).forEach(([id,items])=>{
+  const panel=document.getElementById(id);
+  const lista=panel.querySelector('.lista');
+  lista.innerHTML=items.map((it,i)=>
+   `<label class="check-item"><input type="checkbox" data-panel="${id}"><span>${it[0]} <span class="ref">${it[1]}</span></span></label>`
+  ).join('');
+  panel.querySelectorAll('input').forEach(ch=>ch.addEventListener('change',()=>actualizarProgreso(id)));
+  actualizarProgreso(id);
+ });
+}
+function actualizarProgreso(id){
+ const panel=document.getElementById(id);
+ const total=panel.querySelectorAll('input').length;
+ const hechos=panel.querySelectorAll('input:checked').length;
+ panel.querySelector('.barra i').style.width=(total?100*hechos/total:0)+'%';
+ panel.querySelector('.pct').textContent=hechos+' / '+total;
+}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected','false'));
+ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('activo'));
+ t.setAttribute('aria-selected','true');
+ document.getElementById(t.dataset.panel).classList.add('activo');
+}));
+pintarChecklists();
+
+/* ================= FORMATOS ================= */
+const HOY = new Date().toLocaleDateString('es-ES');
+const FORMATOS=[
+{n:"F1",t:"Cláusula informativa por capas (Arts. 13–14 RGPD)",d:"Para formularios, presupuestos, contratos y puntos de recogida de datos. Capa básica + capa ampliada.",x:
+`CLÁUSULA INFORMATIVA — PROTECCIÓN DE DATOS
+(Capa básica: incluir junto al formulario o firma)
+
+Responsable: [NOMBRE O RAZÓN SOCIAL] — NIF [NIF] — [DIRECCIÓN] — [EMAIL DE CONTACTO]
+Finalidad: [p. ej., gestionar la relación comercial y la prestación del servicio contratado].
+Legitimación: [ejecución de contrato / consentimiento del interesado / obligación legal / interés legítimo].
+Destinatarios: [no se cederán datos a terceros salvo obligación legal / se cederán a: ...].
+Derechos: acceder, rectificar y suprimir los datos, así como oponerse, limitar el tratamiento y solicitar la portabilidad, dirigiéndose a [EMAIL]. Puede reclamar ante la AEPD (www.aepd.es).
+Información adicional: puede consultar la información ampliada en [URL de la política de privacidad / al dorso].
+
+(Capa ampliada: política de privacidad)
+1. Responsable del tratamiento: identidad completa, NIF, dirección, email y, en su caso, DPO y su contacto.
+2. Finalidades detalladas de cada tratamiento y plazos de conservación de cada categoría de datos.
+3. Base jurídica de cada finalidad (art. 6 RGPD). Si es interés legítimo, cuál es.
+4. Destinatarios o categorías de destinatarios; encargados del tratamiento.
+5. Transferencias internacionales, en su caso, y garantías aplicadas.
+6. Derechos y procedimiento para ejercerlos; derecho a retirar el consentimiento; derecho a reclamar ante la AEPD.
+7. Procedencia de los datos si no se obtuvieron del interesado (art. 14 RGPD).`},
+
+{n:"F2",t:"Consentimiento explícito (Art. 7 RGPD)",d:"Modelo de recogida de consentimiento con casillas separadas por finalidad y prueba documental.",x:
+`CONSENTIMIENTO PARA EL TRATAMIENTO DE DATOS PERSONALES
+
+D./D.ª [NOMBRE Y APELLIDOS], con DNI [DNI], mayor de edad, declara haber leído la información sobre protección de datos facilitada por [RESPONSABLE] y consiente de forma libre, específica, informada e inequívoca los siguientes tratamientos (marque solo los que autorice):
+
+[ ] Envío de comunicaciones comerciales sobre productos y servicios propios por email o teléfono.
+[ ] Envío de newsletter informativa.
+[ ] Uso de imagen (fotografía/vídeo) para [FINALIDAD CONCRETA: web, redes sociales…].
+[ ] Cesión de datos a [TERCERO IDENTIFICADO] con la finalidad de [FINALIDAD].
+
+Las casillas no marcadas implican la NO autorización del tratamiento correspondiente. La negativa no condiciona la prestación del servicio principal.
+
+Puede retirar cualquiera de estos consentimientos en todo momento, con la misma facilidad con que lo otorga, escribiendo a [EMAIL], sin efectos retroactivos.
+
+En [LUGAR], a [FECHA].
+Firma del interesado: ______________________
+
+REGISTRO INTERNO (conservar como prueba): fecha, canal de recogida, texto informativo mostrado, finalidades aceptadas.`},
+
+{n:"F3",t:"Plantilla de Registro de Actividades de Tratamiento — RAT (Art. 30 RGPD)",d:"El documento que la AEPD pide primero. Una ficha por cada actividad de tratamiento.",x:
+`REGISTRO DE ACTIVIDADES DE TRATAMIENTO (Art. 30 RGPD)
+Responsable: [RAZÓN SOCIAL] — NIF [NIF] — Contacto: [EMAIL] — DPO (si existe): [NOMBRE/EMAIL]
+Fecha de última revisión: [FECHA]
+
+──────────────────────────────────────────────
+FICHA DE TRATAMIENTO Nº [1]
+Nombre del tratamiento: [p. ej., GESTIÓN DE CLIENTES]
+Finalidad: [gestión comercial, facturación y prestación del servicio]
+Base jurídica: [ejecución de contrato — art. 6.1.b RGPD]
+Categorías de interesados: [clientes y potenciales clientes]
+Categorías de datos: [identificativos, contacto, bancarios, facturación]
+¿Categorías especiales (art. 9)?: [NO / SÍ: especificar y base del art. 9.2]
+Destinatarios / cesiones: [Agencia Tributaria; entidad bancaria]
+Encargados del tratamiento: [gestoría X; software de facturación Y]
+Transferencias internacionales: [NO / SÍ: país, garantía aplicada]
+Plazo de conservación: [duración de la relación + plazos fiscales (mín. 4 años) y de prescripción]
+Medidas de seguridad: [control de accesos, contraseñas, copias de seguridad, cifrado del equipo, armario bajo llave]
+──────────────────────────────────────────────
+
+Repetir la ficha para cada tratamiento habitual, como mínimo:
+· Gestión de clientes · Gestión de proveedores · Recursos humanos y nóminas
+· Marketing y comunicaciones · Videovigilancia · Web y cookies
+· Canal de denuncias (si existe) · Selección de personal (CV)`},
+
+{n:"F4",t:"Contrato de encargo de tratamiento (Art. 28 RGPD)",d:"Para gestoría, hosting, nube, mantenimiento informático, emailing y cualquier proveedor con acceso a datos.",x:
+`CONTRATO DE ENCARGO DE TRATAMIENTO (Art. 28.3 RGPD)
+
+En [LUGAR], a [FECHA], entre:
+RESPONSABLE: [RAZÓN SOCIAL], NIF [NIF], representada por [NOMBRE].
+ENCARGADO: [RAZÓN SOCIAL DEL PROVEEDOR], NIF [NIF], representada por [NOMBRE].
+
+1. OBJETO. El Encargado tratará por cuenta del Responsable los datos necesarios para prestar el servicio de [DESCRIBIR SERVICIO].
+2. DURACIÓN. La del contrato de prestación de servicios. A su fin, el Encargado [devolverá / suprimirá] los datos y las copias existentes, certificándolo por escrito.
+3. TRATAMIENTOS. Tipo de datos: [identificativos, laborales, económicos…]. Categorías de interesados: [clientes, empleados…]. Operaciones: [recogida, conservación, consulta, comunicación…].
+4. OBLIGACIONES DEL ENCARGADO:
+   a) Tratar los datos solo según instrucciones documentadas del Responsable.
+   b) Guardar confidencialidad y garantizar que su personal se compromete a ella.
+   c) Aplicar las medidas de seguridad del art. 32 RGPD.
+   d) No subcontratar sin autorización previa por escrito; el subencargado quedará sujeto a las mismas obligaciones.
+   e) Asistir al Responsable en la atención de derechos y en las obligaciones de los arts. 32 a 36 RGPD.
+   f) Notificar al Responsable las violaciones de seguridad sin dilación indebida y, en todo caso, en un plazo máximo de [24/48] horas desde que las conozca, con la información del art. 33.3 RGPD.
+   g) Poner a disposición del Responsable la información necesaria para demostrar el cumplimiento y permitir auditorías.
+5. OBLIGACIONES DEL RESPONSABLE: entregar los datos necesarios, velar por el cumplimiento del RGPD y supervisar el tratamiento.
+
+Firmado por duplicado.
+El Responsable                    El Encargado`},
+
+{n:"F5",t:"Registro de brechas + notificación a la AEPD (Arts. 33–34 RGPD)",d:"Registro interno obligatorio de toda violación de seguridad y guion de la notificación de 72 horas.",x:
+`REGISTRO INTERNO DE VIOLACIONES DE SEGURIDAD (Art. 33.5 RGPD)
+— Cumplimentar SIEMPRE, se notifique o no a la AEPD —
+
+Nº de incidente: [AAAA-##]        Fecha y hora de detección: [__]
+Descripción de los hechos: [robo de portátil / ransomware / envío masivo con CCO expuesta / acceso no autorizado…]
+Origen / causa probable: [__]
+Categorías y nº aproximado de interesados afectados: [__]
+Categorías y volumen de datos afectados: [__]
+Consecuencias probables: [pérdida de confidencialidad / integridad / disponibilidad]
+Valoración del riesgo para derechos y libertades: [SIN RIESGO / RIESGO / ALTO RIESGO] — Justificación: [__]
+Medidas adoptadas para remediar y mitigar: [__]
+¿Notificada a la AEPD?: [SÍ, fecha __ / NO, motivo: sin riesgo probable]
+¿Comunicada a los interesados?: [SÍ, fecha y medio __ / NO, motivo]
+
+GUION DE NOTIFICACIÓN A LA AEPD (plazo: 72 h desde la constancia — sede electrónica sedeagpd.gob.es):
+1. Naturaleza de la violación: categorías y nº aproximado de interesados y de registros afectados.
+2. Nombre y contacto del DPO o punto de contacto.
+3. Consecuencias probables de la violación.
+4. Medidas adoptadas o propuestas para remediarla y mitigar sus efectos.
+Si no dispone de toda la información, notifique por fases sin agotar el plazo.
+
+COMUNICACIÓN A LOS INTERESADOS (si el riesgo es ALTO): lenguaje claro, misma información (2 a 4) y recomendaciones prácticas (cambiar contraseñas, vigilar movimientos…).`},
+
+{n:"F6",t:"Respuesta a ejercicio de derechos (Arts. 15–22 RGPD)",d:"Modelo de acuse y de respuesta dentro del plazo de 1 mes, con registro de solicitudes.",x:
+`ACUSE DE RECIBO DE SOLICITUD DE DERECHOS
+
+Estimado/a [NOMBRE]:
+Hemos recibido el [FECHA] su solicitud de ejercicio del derecho de [ACCESO / RECTIFICACIÓN / SUPRESIÓN / OPOSICIÓN / LIMITACIÓN / PORTABILIDAD]. Le responderemos en el plazo máximo de un mes desde su recepción (art. 12.3 RGPD).
+[Si hay dudas razonables de identidad: Para tramitarla necesitamos verificar su identidad; le rogamos aporte (medio de verificación proporcionado, sin pedir más datos de los necesarios).]
+
+RESPUESTA ESTIMATORIA (ejemplo: supresión)
+Estimado/a [NOMBRE]:
+En respuesta a su solicitud de [FECHA], le confirmamos que hemos procedido a suprimir sus datos personales de nuestros sistemas, salvo aquellos que debemos conservar bloqueados para el cumplimiento de obligaciones legales [especificar: fiscales, 4 años] durante sus plazos de prescripción.
+Le recordamos que puede presentar reclamación ante la AEPD (www.aepd.es).
+
+RESPUESTA DE PRÓRROGA (solo casos complejos)
+Debido a [complejidad / número de solicitudes], el plazo se amplía en [uno/dos] meses adicionales (art. 12.3 RGPD). Motivo: [__].
+
+REGISTRO INTERNO DE SOLICITUDES
+Fecha entrada | Derecho | Solicitante | Verificación identidad | Fecha respuesta | Sentido | Observaciones`},
+
+{n:"F7",t:"Cartel y ficha de videovigilancia (Art. 22 LOPDGDD)",d:"Texto del cartel obligatorio en zona visible y condiciones de uso de las cámaras.",x:
+`CARTEL INFORMATIVO — ZONA VIDEOVIGILADA
+(colocar en lugar suficientemente visible, antes de entrar en la zona grabada)
+
+⬛ ZONA VIDEOVIGILADA
+Responsable: [RAZÓN SOCIAL] — NIF [NIF]
+Finalidad: seguridad de personas, bienes e instalaciones.
+Puede ejercer sus derechos de acceso, supresión y demás previstos en el RGPD ante:
+[DIRECCIÓN POSTAL] — [EMAIL]
+Más información: [URL o "disponible en recepción"]
+
+CONDICIONES DE USO (ficha interna):
+· Finalidad exclusiva de seguridad: PROHIBIDO usarlas para supervisión general del rendimiento laboral.
+· Prohibido captar vía pública más allá de lo imprescindible, y nunca zonas de descanso, vestuarios o aseos.
+· Conservación de imágenes: máximo 1 MES desde la captación (salvo conservación para acreditar infracciones).
+· Si las cámaras captan a trabajadores: informar previamente y de forma expresa a la plantilla y a sus representantes.
+· Acceso a las imágenes restringido a: [PERSONAS AUTORIZADAS].
+· Incluir el tratamiento "Videovigilancia" en el RAT.
+· Si el sistema lo gestiona una empresa de seguridad: contrato de encargo (Formato F4).`},
+
+{n:"F8",t:"Compromiso de confidencialidad del personal (Art. 32 RGPD)",d:"Documento que firma cada empleado o colaborador con acceso a datos personales.",x:
+`COMPROMISO DE CONFIDENCIALIDAD Y NORMAS DE USO
+
+D./D.ª [NOMBRE], con DNI [DNI], que presta servicios en [EMPRESA] como [PUESTO], se compromete a:
+
+1. Guardar secreto sobre los datos personales a los que acceda por razón de su puesto, incluso tras finalizar la relación laboral.
+2. Tratar los datos únicamente para las funciones encomendadas y conforme a las instrucciones de la empresa.
+3. No comunicar datos a terceros ni extraerlos de los sistemas (email personal, USB, nube privada) sin autorización.
+4. Custodiar credenciales: contraseñas personales e intransferibles; bloqueo de sesión al ausentarse.
+5. Política de mesa limpia: no dejar documentos con datos a la vista; destruir con destructora, no en papelera.
+6. Comunicar de inmediato a [RESPONSABLE/EMAIL] cualquier incidente de seguridad (pérdida de dispositivo, correo sospechoso, acceso indebido) para poder cumplir el plazo legal de 72 horas.
+7. No instalar software no autorizado ni utilizar herramientas de IA con datos personales sin aprobación de la empresa.
+
+El incumplimiento podrá dar lugar a responsabilidad disciplinaria, sin perjuicio de otras responsabilidades legales.
+
+En [LUGAR], a [FECHA].
+Firma del trabajador/a: ______________________`},
+
+{n:"F9",t:"Cláusula de pie de email y avisos breves",d:"Textos cortos para firma de correo, presupuestos, tickets y atención telefónica.",x:
+`PIE DE EMAIL
+Protección de datos: [RAZÓN SOCIAL] tratará sus datos para gestionar la relación comercial (base: ejecución de contrato). Puede ejercer sus derechos de acceso, rectificación, supresión y demás en [EMAIL]. Info ampliada: [URL]. Este mensaje y sus adjuntos son confidenciales; si lo ha recibido por error, comuníquelo y elimínelo.
+
+AVISO EN PRESUPUESTO / FACTURA / TICKET
+Sus datos serán tratados por [RAZÓN SOCIAL] para la gestión y facturación del servicio y se conservarán los plazos fiscales legales. Derechos e información: [EMAIL] / [URL].
+
+LOCUCIÓN TELEFÓNICA (si se graban llamadas)
+"Le informamos de que esta llamada puede ser grabada por motivos de calidad y seguridad. Responsable: [RAZÓN SOCIAL]. Puede ejercer sus derechos e informarse en [URL/EMAIL]."
+
+RECOGIDA DE CV
+Los CV recibidos se incorporan al tratamiento "Selección de personal" de [RAZÓN SOCIAL] (base: consentimiento del candidato) y se conservarán [12] meses, tras lo cual serán destruidos. Derechos: [EMAIL].`},
+
+{n:"F10",t:"Política de privacidad y cookies para la web",d:"Índice completo de los textos legales que debe publicar todo sitio web o tienda online.",x:
+`POLÍTICA DE PRIVACIDAD WEB — CONTENIDO MÍNIMO
+
+1. RESPONSABLE: [RAZÓN SOCIAL], NIF, dirección, email, datos registrales y, en su caso, DPO.
+2. TRATAMIENTOS: por cada formulario o funcionalidad (contacto, newsletter, compra, registro, comentarios):
+   finalidad, base jurídica, plazo de conservación y destinatarios.
+3. ENCARGADOS: hosting, pasarela de pago, emailing, analítica… y sus garantías.
+4. TRANSFERENCIAS INTERNACIONALES: identificar herramientas fuera de la UE y la garantía aplicada
+   (decisión de adecuación o cláusulas contractuales tipo).
+5. DERECHOS: cómo ejercerlos, canal, plazo de 1 mes, y derecho a reclamar ante la AEPD.
+6. MENORES: [no se dirigen servicios a menores de 14 años / condiciones aplicables].
+
+POLÍTICA DE COOKIES — REQUISITOS (Guía AEPD)
+· Banner de primera capa con tres opciones equivalentes: ACEPTAR — RECHAZAR — CONFIGURAR.
+· Rechazar debe ser tan fácil como aceptar (mismo nivel, mismo número de clics).
+· Ninguna cookie no esencial se instala antes del consentimiento.
+· Segunda capa con listado: nombre, titular, finalidad, duración y tipo de cada cookie.
+· Posibilidad de retirar el consentimiento en cualquier momento (enlace permanente).
+· Renovar el consentimiento periódicamente (recomendación: máximo 24 meses).
+
+AVISO LEGAL (Art. 10 LSSI): denominación, NIF, domicilio, email, datos registrales,
+y en actividades reguladas, colegio profesional y titulación.`}
+];
+
+const grid=document.getElementById('grid-formatos');
+grid.innerHTML=FORMATOS.map((f,i)=>
+ `<div class="formato"><div class="fnum">FORMATO ${f.n}</div><h3>${f.t}</h3><p>${f.d}</p>
+  <div class="acciones"><button class="btn-mini" data-ver="${i}">Ver modelo</button>
+  <button class="btn-mini gris" data-desc="${i}">Descargar .txt</button></div></div>`).join('');
+
+const modal=document.getElementById('modal');
+grid.addEventListener('click',e=>{
+ const v=e.target.dataset.ver, d=e.target.dataset.desc;
+ if(v!==undefined){
+  document.getElementById('modal-titulo').textContent=FORMATOS[v].n+' · '+FORMATOS[v].t;
+  document.getElementById('modal-texto').textContent=FORMATOS[v].x;
+  modal.classList.add('abierto');
+ }
+ if(d!==undefined) descargar(FORMATOS[d].n+'-'+FORMATOS[d].t.split('(')[0].trim().replace(/\s+/g,'-')+'.txt', FORMATOS[d].x);
+});
+modal.addEventListener('click',e=>{if(e.target===modal||e.target.classList.contains('modal-cerrar'))modal.classList.remove('abierto')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')modal.classList.remove('abierto')});
+
+function descargar(nombre,texto){
+ const blob=new Blob([texto],{type:'text/plain;charset=utf-8'});
+ const a=document.createElement('a');
+ a.href=URL.createObjectURL(blob); a.download=nombre;
+ document.body.appendChild(a); a.click(); a.remove();
+ setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+</script>
+
+<script>
+/* ================= PROCESOS ================= */
+const PROCESOS=[
+{ref:"PROCESO P1",t:"Adaptación inicial del negocio (de cero a en regla)",pasos:[
+ ["Inventariar tratamientos","Liste todo uso de datos personales: clientes, proveedores, nóminas, CV, web, cámaras, marketing.",""],
+ ["Asignar base jurídica y plazos","Para cada tratamiento: base del art. 6 RGPD y plazo de conservación (mínimo legal fiscal: 4 años).",""],
+ ["Elaborar el RAT","Complete el Formato F3 con una ficha por tratamiento. Es su documento maestro.",""],
+ ["Colocar cláusulas informativas","Formularios, contratos, presupuestos, web, email y cartel de cámaras (F1, F7, F9, F10).",""],
+ ["Firmar contratos de encargo","Gestoría, hosting, software, nube, emailing… un contrato o DPA por proveedor (F4).",""],
+ ["Implantar seguridad y confidencialidad","Contraseñas, copias, control de accesos, mesa limpia y compromisos firmados (F8).",""],
+ ["Verificar DPO y preparar incidentes","Compruebe el art. 34 LOPDGDD; deje listos el registro de brechas (F5) y el canal de derechos (F6).","Revisión anual"]
+]},
+{ref:"PROCESO P2",t:"Brecha de seguridad — el reloj de las 72 horas",pasos:[
+ ["Detectar y contener","Aísle el sistema afectado, cambie credenciales, preserve evidencias. Anote fecha y hora exactas.","Hora 0"],
+ ["Evaluar el riesgo","¿Qué datos, cuántas personas, qué consecuencias probables? Clasifique: sin riesgo / riesgo / alto riesgo.","Horas 0–24"],
+ ["Registrar internamente","Cumplimente el registro de brechas (F5) SIEMPRE, aunque decida no notificar.","Horas 0–24"],
+ ["Notificar a la AEPD si hay riesgo","Sede electrónica sedeagpd.gob.es con el contenido del art. 33.3. Puede notificar por fases.","Antes de 72 h"],
+ ["Comunicar a los afectados si el riesgo es alto","Lenguaje claro y recomendaciones prácticas (cambiar contraseñas, vigilar cuentas).","Sin dilación"],
+ ["Remediar y aprender","Corrija la causa raíz, actualice el análisis de riesgos y documente las mejoras.","Días siguientes"]
+]},
+{ref:"PROCESO P3",t:"Ejercicio de derechos — respuesta en 1 mes",pasos:[
+ ["Recibir y registrar","Cualquier canal vale (email, escrito, verbal documentado). Anote la fecha de entrada en el registro (F6).","Día 0"],
+ ["Verificar la identidad","Solo si hay dudas razonables, y sin pedir más datos de los necesarios.","Días 0–5"],
+ ["Analizar la solicitud","¿Procede? ¿Hay obligación legal de conservar (bloqueo de datos, art. 32 LOPDGDD)? ¿Afecta a terceros?","Días 5–15"],
+ ["Responder motivadamente","Estime o deniegue por escrito, siempre informando del derecho a reclamar ante la AEPD (F6).","Antes de 1 mes"],
+ ["Prorrogar solo si es complejo","Hasta 2 meses más, avisando dentro del primer mes y explicando el motivo.","Excepcional"],
+ ["Ejecutar y documentar","Aplique el cambio en TODOS los sistemas y encargados, y cierre el registro.","Inmediato"]
+]},
+{ref:"PROCESO P4",t:"Alta de un proveedor con acceso a datos (encargado)",pasos:[
+ ["Identificar si es encargado","¿Accede a datos personales por cuenta de su negocio? Gestoría, nube, IA, emailing, mantenimiento: sí.",""],
+ ["Diligencia previa","Verifique que ofrece garantías: medidas de seguridad, certificaciones, ubicación de servidores.",""],
+ ["Firmar el contrato de encargo","Formato F4 o el DPA estándar del proveedor, revisando que cubre el art. 28.3.","Antes de dar acceso"],
+ ["Verificar transferencias internacionales","Si trata datos fuera de la UE: decisión de adecuación o cláusulas contractuales tipo.",""],
+ ["Actualizar el RAT","Añada el encargado en las fichas de los tratamientos afectados.",""],
+ ["Revisar y cerrar","Revisión periódica del cumplimiento; a fin de contrato, exigir devolución o supresión certificada.","Anual / al fin"]
+]}];
+
+document.getElementById('lista-procesos').innerHTML=PROCESOS.map((p,i)=>
+ `<div class="proceso" id="proc-${i}">
+   <button class="proceso-cab" aria-expanded="false" data-p="${i}">
+     <div><span class="pref">${p.ref}</span><h3>${p.t}</h3></div>
+     <span class="flecha" aria-hidden="true">›</span>
+   </button>
+   <div class="pasos">${p.pasos.map((s,j)=>
+     `<div class="paso"><div class="paso-n">${j+1}</div>
+      <div><b>${s[0]}</b><p>${s[1]}</p>${s[2]?`<span class="plazo">⏱ ${s[2]}</span>`:''}</div></div>`).join('')}
+   </div></div>`).join('');
+
+document.querySelectorAll('.proceso-cab').forEach(b=>b.addEventListener('click',()=>{
+ const p=document.getElementById('proc-'+b.dataset.p);
+ const abierto=p.classList.toggle('abierto');
+ b.setAttribute('aria-expanded',abierto);
+}));
+
+/* ================= DIAGNÓSTICO ================= */
+const PREGUNTAS=[
+ {q:"¿Tiene elaborado y actualizado su Registro de Actividades de Tratamiento (RAT)?",ref:"Art. 30 RGPD",peso:3,
+  mal:"Sin RAT no puede demostrar cumplimiento: es el primer documento que solicita la AEPD.",acc:"Complete la plantilla del Formato F3 esta misma semana: una ficha por tratamiento (clientes, nóminas, web…)."},
+ {q:"¿Ha identificado la base jurídica (art. 6) de cada tratamiento que realiza?",ref:"Art. 6 RGPD",peso:3,
+  mal:"Tratar datos sin base jurídica es infracción muy grave (hasta 20 M€ o 4%).",acc:"Revise tratamiento a tratamiento: contrato, obligación legal, consentimiento o interés legítimo documentado."},
+ {q:"¿Informa a clientes y contactos al recoger sus datos (cláusulas en formularios, contratos, web)?",ref:"Arts. 13–14 RGPD",peso:3,
+  mal:"La falta de información al interesado es de las infracciones más sancionadas a pymes.",acc:"Implante la cláusula por capas (Formato F1) en todos los puntos de recogida."},
+ {q:"¿Tiene contrato de encargo firmado con su gestoría y demás proveedores con acceso a datos?",ref:"Art. 28 RGPD",peso:2,
+  mal:"Cada proveedor sin contrato de encargo es un incumplimiento independiente.",acc:"Inventaríe proveedores y firme el Formato F4 o localice el DPA de cada servicio (siga el Proceso P4)."},
+ {q:"¿Aplica medidas de seguridad proporcionadas (contraseñas robustas, copias de seguridad, control de accesos)?",ref:"Art. 32 RGPD",peso:3,
+  mal:"Sin medidas de seguridad, cualquier incidente se convierte en brecha notificable y sancionable.",acc:"Active doble factor, copias automáticas y cifrado de portátiles. Firme confidencialidad con el personal (F8)."},
+ {q:"¿Su personal ha firmado compromisos de confidencialidad y conoce las normas de uso de los datos?",ref:"Art. 32 RGPD",peso:2,
+  mal:"La responsabilidad de los errores del personal recae en la empresa.",acc:"Haga firmar el Formato F8 a toda la plantilla y guárdelo en cada expediente."},
+ {q:"¿Tiene un canal definido y un procedimiento para responder a los derechos de las personas en 1 mes?",ref:"Arts. 15–22 RGPD",peso:2,
+  mal:"No responder en plazo a un derecho suele acabar en reclamación ante la AEPD.",acc:"Designe un email de contacto, use el Formato F6 y siga el Proceso P3."},
+ {q:"¿Dispone de un registro de brechas y sabría notificar a la AEPD en 72 horas?",ref:"Arts. 33–34 RGPD",peso:2,
+  mal:"El plazo de 72 h corre desde que detecta el incidente: sin procedimiento previo es casi imposible cumplirlo.",acc:"Deje preparado el Formato F5 y ensaye el Proceso P2 con su equipo."},
+ {q:"¿Ha verificado si está obligado a designar un DPO (art. 34 LOPDGDD) y, en su caso, lo ha comunicado a la AEPD?",ref:"Art. 37 RGPD · Art. 34 LOPDGDD",peso:2,
+  mal:"No designar DPO siendo obligatorio es infracción grave, con sanciones conocidas de 10.000 a 50.000 €.",acc:"Compruebe la lista del art. 34 LOPDGDD (sanidad, educación, seguros, publicidad con perfilados…). La comunicación a la AEPD debe hacerse en 10 días."},
+ {q:"Si tiene web: ¿cuenta con aviso legal, política de privacidad y banner de cookies donde rechazar es tan fácil como aceptar?",ref:"LSSI · Guía cookies AEPD",peso:2,
+  mal:"Los banners mal configurados son una de las líneas de inspección más activas de la AEPD.",acc:"Aplique el Formato F10: tres botones equivalentes y ninguna cookie no esencial antes del consentimiento."},
+ {q:"Si tiene videovigilancia: ¿hay cartel informativo y las imágenes se conservan máximo 1 mes?",ref:"Art. 22 LOPDGDD",peso:2,
+  mal:"La videovigilancia indebida genera sanciones frecuentes incluso a negocios muy pequeños.",acc:"Coloque el cartel del Formato F7, limite la conservación a 1 mes y nunca grabe zonas de descanso."},
+ {q:"¿Solo pide los datos estrictamente necesarios y tiene definidos plazos de conservación y borrado?",ref:"Art. 5 RGPD",peso:2,
+  mal:"La acumulación indefinida de datos multiplica el riesgo y vulnera los principios de minimización y limitación.",acc:"Defina en el RAT un plazo por categoría (regla fiscal: 4 años) y programe purgas periódicas."},
+ {q:"Si envía marketing: ¿tiene consentimiento o relación previa, casillas sin premarcar y baja fácil en cada envío?",ref:"Art. 7 RGPD · Art. 21 LSSI",peso:2,
+  mal:"El spam sin consentimiento es sancionable tanto por la LSSI como por el RGPD.",acc:"Use el Formato F2, guarde la prueba del consentimiento e incluya enlace de baja en cada comunicación."},
+ {q:"Si usa herramientas de IA o servicios fuera de la UE con datos personales: ¿lo ha evaluado y documentado?",ref:"Cap. V RGPD · Art. 22 RGPD",peso:2,
+  mal:"La AEPD está vigilando especialmente las decisiones automatizadas y el envío de datos a herramientas de IA sin garantías.",acc:"Inventaríe las herramientas, verifique sus garantías de transferencia y asegure revisión humana de decisiones que afecten a personas."}
+];
+
+const cont=document.getElementById('cuestionario');
+cont.innerHTML=PREGUNTAS.map((p,i)=>
+ `<fieldset class="pregunta" style="border:none">
+   <legend class="q">${i+1}. ${p.q} <span class="ref">${p.ref}</span></legend>
+   <div class="opciones">
+     <label><input type="radio" name="p${i}" value="2">Sí, implantado</label>
+     <label><input type="radio" name="p${i}" value="1">Parcialmente</label>
+     <label><input type="radio" name="p${i}" value="0">No / no lo sé</label>
+     <label><input type="radio" name="p${i}" value="na">No me aplica</label>
+   </div></fieldset>`).join('');
+
+document.getElementById('btn-generar').addEventListener('click',()=>{
+ const aviso=document.getElementById('aviso-faltan');
+ const resp=[];
+ for(let i=0;i<PREGUNTAS.length;i++){
+  const r=document.querySelector(`input[name="p${i}"]:checked`);
+  if(!r){aviso.hidden=false;document.getElementsByName('p'+i)[0].closest('.pregunta').scrollIntoView({block:'center'});return}
+  resp.push(r.value);
+ }
+ aviso.hidden=true;
+ generarInforme(resp);
+});
+
+let ultimoTxt='';
+function generarInforme(resp){
+ let obt=0, max=0, graves=0, parciales=0;
+ const hall=[], plan=[];
+ resp.forEach((v,i)=>{
+  const p=PREGUNTAS[i];
+  if(v==='na') return;
+  max+=2*p.peso;
+  obt+=Number(v)*p.peso;
+  if(v==='0'){graves++;hall.push({tipo:'mal',p});plan.push({peso:p.peso,txt:p.acc,ref:p.ref})}
+  else if(v==='1'){parciales++;hall.push({tipo:'parcial',p});plan.push({peso:p.peso-0.5,txt:p.acc,ref:p.ref})}
+  else hall.push({tipo:'bien',p});
+ });
+ const pct=max?Math.round(100*obt/max):100;
+ const nivel = pct>=80?['bajo','RIESGO BAJO','Situación razonable: mantenga la documentación viva y revise anualmente.']
+             : pct>=50?['medio','RIESGO MEDIO','Hay carencias relevantes: una inspección o reclamación hoy le supondría problemas.']
+             : ['alto','RIESGO ALTO','Incumplimientos graves: su exposición a sanciones es seria. Actúe de inmediato.'];
+
+ const sello=document.getElementById('inf-sello');
+ sello.className='sello-caja sello-'+nivel[0];
+ sello.textContent=nivel[1];
+ document.getElementById('inf-meta').innerHTML=
+  'Fecha de emisión: '+new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})+
+  '<br>Marco: RGPD (UE) 2016/679 · LO 3/2018 LOPDGDD<br>'+nivel[2];
+ document.getElementById('inf-nota-num').textContent=pct+' / 100';
+ document.getElementById('inf-graves').textContent=graves;
+ document.getElementById('inf-parciales').textContent=parciales;
+
+ document.getElementById('inf-hallazgos').innerHTML=hall.map(h=>{
+  const ic=h.tipo==='mal'?'✕':h.tipo==='parcial'?'!':'✓';
+  const cuerpo=h.tipo==='bien'
+    ? '<p>Correcto. Mantenga la evidencia documental.</p>'
+    : '<p>'+h.p.mal+'</p>';
+  return `<div class="hallazgo h-${h.tipo}"><div class="icono">${ic}</div>
+    <div><b>${h.p.q} <span class="ref">${h.p.ref}</span></b>${cuerpo}</div></div>`;
+ }).join('');
+
+ plan.sort((a,b)=>b.peso-a.peso);
+ document.getElementById('inf-plan').innerHTML = plan.length
+  ? plan.map(a=>`<li>${a.txt} <span class="ref">${a.ref}</span></li>`).join('')
+  : '<li>Sin acciones críticas pendientes. Programe una revisión anual del RAT, contratos de encargo y medidas de seguridad.</li>';
+
+ ultimoTxt='INFORME DE DIAGNÓSTICO — PROTECCIÓN DE DATOS (RGPD / LOPDGDD)\n'+
+  'Fecha: '+new Date().toLocaleDateString('es-ES')+'\n'+
+  'Nivel: '+nivel[1]+' — Índice de cumplimiento: '+pct+'/100\n'+
+  'Incumplimientos: '+graves+' · Puntos a reforzar: '+parciales+'\n\nHALLAZGOS\n'+
+  hall.map(h=>('['+(h.tipo==='mal'?'INCUMPLE':h.tipo==='parcial'?'PARCIAL':'CUMPLE')+'] '+h.p.q+' ('+h.p.ref+')'+(h.tipo!=='bien'?'\n   → '+h.p.mal:''))).join('\n')+
+  '\n\nPLAN DE ACCIÓN PRIORIZADO\n'+
+  (plan.length?plan.map((a,i)=>(i+1)+'. '+a.txt+' ['+a.ref+']').join('\n'):'Sin acciones críticas pendientes.')+
+  '\n\nNota: autoevaluación orientativa; no constituye asesoramiento jurídico. Herramientas oficiales: Facilita RGPD, Gestiona EIPD y Evalúa-Riesgo (aepd.es).';
+
+ const inf=document.getElementById('informe');
+ inf.classList.add('visible');
+ inf.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.getElementById('btn-txt').addEventListener('click',()=>descargar('informe-diagnostico-proteccion-datos.txt',ultimoTxt));
+
+/* ================= MATRIZ DE RIESGOS ================= */
+// prob base sugerida cuando NO se cumple / cuando SÍ se cumple; impacto sugerido inicial
+const RIESGOS_MX=[
+ {t:"Ausencia de RAT (Registro de Actividades)",ref:"Art. 30 RGPD",pNo:4,pSi:1,imp:4},
+ {t:"Tratamiento sin base jurídica válida",ref:"Art. 6 RGPD",pNo:4,pSi:1,imp:5},
+ {t:"Falta de información al interesado (transparencia)",ref:"Arts. 13–14 RGPD",pNo:4,pSi:1,imp:4},
+ {t:"Proveedores sin contrato de encargo",ref:"Art. 28 RGPD",pNo:3,pSi:1,imp:3},
+ {t:"Medidas de seguridad insuficientes",ref:"Art. 32 RGPD",pNo:4,pSi:2,imp:5},
+ {t:"Personal sin deber de confidencialidad",ref:"Art. 32 RGPD",pNo:3,pSi:1,imp:3},
+ {t:"No atender derechos en plazo (1 mes)",ref:"Arts. 15–22 RGPD",pNo:3,pSi:1,imp:3},
+ {t:"No poder notificar brechas en 72 h",ref:"Arts. 33–34 RGPD",pNo:3,pSi:1,imp:4},
+ {t:"No designar DPO siendo obligatorio",ref:"Art. 37 · Art. 34 LOPDGDD",pNo:3,pSi:1,imp:4},
+ {t:"Cookies / textos legales web deficientes",ref:"LSSI · Guía cookies AEPD",pNo:4,pSi:1,imp:3},
+ {t:"Videovigilancia sin cartel o exceso de conservación",ref:"Art. 22 LOPDGDD",pNo:3,pSi:1,imp:3},
+ {t:"Exceso de datos / sin plazos de borrado",ref:"Art. 5 RGPD",pNo:3,pSi:1,imp:3},
+ {t:"Marketing sin consentimiento válido",ref:"Art. 7 RGPD · Art. 21 LSSI",pNo:3,pSi:1,imp:3},
+ {t:"IA / transferencias fuera de la UE sin garantías",ref:"Cap. V · Art. 22 RGPD",pNo:3,pSi:1,imp:4}
+];
+
+const cuerpo=document.getElementById('mx-cuerpo');
+function opts(sel){let s='';for(let i=1;i<=5;i++)s+=`<option value="${i}"${i==sel?' selected':''}>${i}</option>`;return s}
+cuerpo.innerHTML=RIESGOS_MX.map((r,i)=>
+ `<tr>
+   <td class="mx-riesgo"><b>${r.t}</b><span class="ref">${r.ref}</span></td>
+   <td class="c"><select class="mx-sel" data-cumple="${i}">
+       <option value="">— elija —</option>
+       <option value="si">Sí, cumplo</option>
+       <option value="no">No / parcial</option></select></td>
+   <td class="c"><select class="mx-sel" data-prob="${i}">${opts(r.pNo)}</select></td>
+   <td class="c"><select class="mx-sel" data-imp="${i}">${opts(r.imp)}</select></td>
+   <td class="c"><span class="mx-nivel n${r.pNo*r.imp>=15?5:r.pNo*r.imp>=10?4:r.pNo*r.imp>=5?3:r.pNo*r.imp>=2?2:1}" data-nivel="${i}">${r.pNo*r.imp}</span></td>
+  </tr>`).join('');
+
+function nivelClase(v){return v>=15?5:v>=10?4:v>=5?3:v>=2?2:1}
+function nivelHeat(v){return v>=15?'rojo':v>=10?'naranja':v>=5?'amarillo':'verde'}
+
+// al cambiar cumple, ajusta la probabilidad sugerida
+cuerpo.addEventListener('change',e=>{
+ const ci=e.target.dataset.cumple;
+ if(ci!==undefined){
+  const i=+ci, sel=e.target;
+  sel.classList.toggle('mx-cumple-si',sel.value==='si');
+  sel.classList.toggle('mx-cumple-no',sel.value==='no');
+  const pSel=cuerpo.querySelector(`[data-prob="${i}"]`);
+  if(sel.value==='si')pSel.value=RIESGOS_MX[i].pSi;
+  else if(sel.value==='no')pSel.value=RIESGOS_MX[i].pNo;
+ }
+ // recalcular nivel de la fila
+ const idx = e.target.dataset.prob ?? e.target.dataset.imp ?? e.target.dataset.cumple;
+ if(idx!==undefined){
+  const i=+idx;
+  const p=+cuerpo.querySelector(`[data-prob="${i}"]`).value;
+  const im=+cuerpo.querySelector(`[data-imp="${i}"]`).value;
+  const v=p*im, chip=cuerpo.querySelector(`[data-nivel="${i}"]`);
+  chip.textContent=v; chip.className='mx-nivel n'+nivelClase(v);
+ }
+});
+
+document.getElementById('mx-generar').addEventListener('click',()=>{
+ const datos=RIESGOS_MX.map((r,i)=>{
+  const p=+cuerpo.querySelector(`[data-prob="${i}"]`).value;
+  const im=+cuerpo.querySelector(`[data-imp="${i}"]`).value;
+  const cumple=cuerpo.querySelector(`[data-cumple="${i}"]`).value;
+  return {...r,p,im,v:p*im,cumple,id:i+1};
+ });
+
+ // mapa de calor: fila = impacto (5 arriba → 1 abajo), col = prob (1 izq → 5 der)
+ const heat=document.getElementById('mx-heat');
+ let cells='';
+ for(let imp=5;imp>=1;imp--){
+  for(let prob=1;prob<=5;prob++){
+   const v=prob*imp;
+   const aqui=datos.filter(d=>d.p===prob&&d.im===imp);
+   const chips=aqui.map(d=>`<span class="chip n${nivelClase(d.v)}" title="${d.t} (${d.ref}) · Riesgo ${d.v}">${d.id}</span>`).join('');
+   cells+=`<div class="heat-cell heat-${nivelHeat(v)}"><span class="coord">${v}</span>${chips}</div>`;
+  }
+ }
+ heat.innerHTML=cells;
+
+ const criticos=datos.filter(d=>d.v>=15).length;
+ const altos=datos.filter(d=>d.v>=10&&d.v<15).length;
+ const media=(datos.reduce((s,d)=>s+d.v,0)/datos.length).toFixed(1);
+ document.getElementById('mx-criticos').textContent=criticos;
+ document.getElementById('mx-altos').textContent=altos;
+ document.getElementById('mx-medio').textContent=media+' / 25';
+
+ const orden=[...datos].sort((a,b)=>b.v-a.v);
+ document.getElementById('mx-ranking').innerHTML=orden.map(d=>
+  `<div class="mx-fila">
+    <span class="idx n${nivelClase(d.v)}">${d.id}</span>
+    <div><b>${d.t} <span class="ref">${d.ref}</span></b>
+     <small>Probabilidad ${d.p} × Impacto ${d.im}${d.cumple==='no'?' · declarado NO cumplido':d.cumple==='si'?' · declarado cumplido':''}</small></div>
+    <div class="val"><span class="mx-nivel n${nivelClase(d.v)}">${d.v}</span></div>
+   </div>`).join('');
+
+ document.getElementById('mx-fecha').textContent='Emitido el '+new Date().toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'})+' · Riesgo = Probabilidad × Impacto (1–25)';
+
+ mxTxt='MATRIZ DE RIESGOS — PROTECCIÓN DE DATOS (RGPD/LOPDGDD)\n'+
+  'Fecha: '+new Date().toLocaleDateString('es-ES')+'\n'+
+  'Riesgos críticos: '+criticos+' · altos: '+altos+' · índice medio: '+media+'/25\n\n'+
+  'RANKING DE EXPOSICIÓN (mayor a menor)\n'+
+  orden.map(d=>('R'+d.id).padEnd(4)+' ['+String(d.v).padStart(2)+'] '+d.t+' ('+d.ref+') — Prob '+d.p+' × Imp '+d.im+
+    (d.cumple==='no'?' · NO cumple':d.cumple==='si'?' · cumple':'')).join('\n')+
+  '\n\nNota: estimaciones del propio responsable; herramienta de priorización, no valoración jurídica.';
+
+ const res=document.getElementById('mx-resultado');
+ res.classList.add('visible');
+ res.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+let mxTxt='';
+document.getElementById('mx-txt').addEventListener('click',()=>descargar('matriz-riesgos-proteccion-datos.txt',mxTxt));
+document.getElementById('mx-reset').addEventListener('click',()=>{
+ RIESGOS_MX.forEach((r,i)=>{
+  const c=cuerpo.querySelector(`[data-cumple="${i}"]`);c.value='';c.className='mx-sel';
+  cuerpo.querySelector(`[data-prob="${i}"]`).value=r.pNo;
+  cuerpo.querySelector(`[data-imp="${i}"]`).value=r.imp;
+  const chip=cuerpo.querySelector(`[data-nivel="${i}"]`);const v=r.pNo*r.imp;
+  chip.textContent=v;chip.className='mx-nivel n'+nivelClase(v);
+ });
+ document.getElementById('mx-resultado').classList.remove('visible');
+});
+</script>
+</body>
+</html>
