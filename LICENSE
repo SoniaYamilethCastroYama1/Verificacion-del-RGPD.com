@@ -1,21 +1,46 @@
-MIT License
+EXPEDIENTE·DATOS — Herramienta de verificación de cumplimiento RGPD/LOPDGDD
+Copyright (c) 2026 Sonia Castro. Todos los derechos reservados.
 
-Copyright (c) 2026 cerebro1111-hub
+===========================================================================
+AVISO DE DERECHOS Y CONDICIONES DE USO
+===========================================================================
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Esta obra (código, textos, formatos, checklists, cuestionario de diagnóstico
+y matriz de riesgos) es propiedad intelectual de Sonia Castro y está protegida
+por la legislación de propiedad intelectual aplicable.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Se publica bajo licencia Creative Commons
+Reconocimiento – NoComercial – SinObraDerivada 4.0 Internacional
+(CC BY-NC-ND 4.0).
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+USTED PUEDE, de forma gratuita:
+  · USAR la herramienta para autoevaluar su empresa o actividad.
+  · COMPARTIR el enlace y copiar la obra tal cual, por cualquier medio,
+    siempre que cite a la autora.
+
+USTED NO PUEDE:
+  · VENDER la herramienta ni cobrar por su uso, acceso o distribución
+    (uso NO COMERCIAL).
+  · MODIFICAR, adaptar, transformar o crear obras derivadas a partir de ella
+    (SIN OBRA DERIVADA).
+  · Retirar los avisos de autoría, la firma de la autora ni este aviso legal.
+
+RECONOCIMIENTO OBLIGATORIO:
+  Debe atribuir la obra a "Sonia Castro — Traductora de datos y
+  automatizaciones" e incluir un enlace a esta licencia, sin sugerir que la
+  autora la respalda a usted o a su uso concreto.
+
+Texto legal completo de la licencia:
+  https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es
+
+Cualquier uso fuera de estas condiciones (por ejemplo, comercialización o
+creación de versiones modificadas) requiere autorización previa y por escrito
+de la autora: scastrya7@doct.ub.edu
+
+===========================================================================
+DESCARGO DE RESPONSABILIDAD
+===========================================================================
+Esta herramienta es informativa y orientativa. No constituye asesoramiento
+jurídico ni sustituye una auditoría profesional de protección de datos.
+La obra se proporciona "tal cual", sin garantías de ningún tipo. La autora no
+asume responsabilidad por decisiones tomadas a partir de su uso.
